@@ -1,12 +1,18 @@
 import Header from "./components/Header";
 import CoreConcept from "./components/CoreConcept";
-import { CORE_CONCEPTS } from "./data";
+import { EXAMPLES, CORE_CONCEPTS } from "./data";
 import TabButton from "./components/TabButton";
+import { useState } from "react";
 
 function App() {
+  console.log("APP COMPONENT EXECUTING");
+  const [selectedTopic, setSelectedTopic] = useState("");
+
   function handleSelect(selectedTab) {
-    // selectedTab = "props, comp, jsx, state";
+    // selectedTab = "props, comp, jsx, state";  tabs
+    setSelectedTopic(selectedTab);
     console.log(selectedTab);
+    console.log("state:", selectedTopic); //state value will update after the component funcion reexecutes
   }
 
   return (
@@ -33,19 +39,24 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton onSelect={() => handleSelect("props")}>
+            <TabButton onSelect={() => handleSelect("components")}>
               Components
             </TabButton>
-            <TabButton onSelect={() => handleSelect("jsx")}>
-              Components
-            </TabButton>
-            <TabButton onSelect={() => handleSelect("state")}>
-              Components
-            </TabButton>
-            <TabButton onSelect={() => handleSelect("comp")}>
-              Components
-            </TabButton>
+            <TabButton onSelect={() => handleSelect("jsx")}>jsx</TabButton>
+            <TabButton onSelect={() => handleSelect("props")}>props</TabButton>
+            <TabButton onSelect={() => handleSelect("state")}>state</TabButton>
           </menu>
+          {!selectedTopic ? (
+            <p>Please select a tab</p>
+          ) : (
+            <div id="tab-content">
+              <h3>{EXAMPLES[selectedTopic].title}</h3>
+              <p>{EXAMPLES[selectedTopic].description}</p>
+              <pre>
+                <code>{EXAMPLES[selectedTopic].code}</code>
+              </pre>
+            </div>
+          )}
         </section>
       </main>
     </div>
