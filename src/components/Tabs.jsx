@@ -1,5 +1,5 @@
-function Tabs({ buttons, children, buttonsContainer }) {
-  const ButtonsContainer = buttonsContainer;
+function Tabs({ buttons, children, ButtonsContainer = "menu" }) {
+  // const ButtonsContainer = buttonsContainer;
 
   return (
     <>
